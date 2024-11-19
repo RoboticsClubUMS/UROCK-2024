@@ -3,7 +3,7 @@
 
 #include <ESP32Servo.h>
 
-int err[4][2] = {{5, 7}, {1, 1}, {1, 1}, {1, 1}};
+int err[4][2] = {{5, 7}, {0, 0}, {3, 10}, {8, 10}};
 //int invKinA[10] = {29, 16, 7, 3, 6, 15, 21, 25, 28, 29};
 int invKinA[3] = {90, 94, 117};  
 //int invKinB[10] = {29, 27, 30, 36, 45, 57, 54, 50, 44, 37};
@@ -27,11 +27,11 @@ Servo LEG4S2;
 #define LEG2PIN1 13
 #define LEG2PIN2 12
 
-#define LEG3PIN1 22
-#define LEG3PIN2 23
+#define LEG3PIN1 33
+#define LEG3PIN2 32
 
-#define LEG4PIN1 33
-#define LEG4PIN2 32
+#define LEG4PIN1 22
+#define LEG4PIN2 23
 
 #define SERVO_MIN_PULSE 500
 #define SERVO_MAX_PULSE 2500
@@ -74,13 +74,13 @@ void L1Move(int index) {
 }
 
 void L2Move(int index) {
-  LEG2S1.write(invKinA[index] + err[1][0]);
-  LEG2S2.write(invKinB[index] + err[1][1]);
+  LEG2S1.write((invKinA[2 - index] * 270 / 180) + err[1][0]);
+  LEG2S2.write((invKinB[2 - index] * 270 / 180) + err[1][1]);
 }
 
 void L3Move(int index) {
-  LEG3S1.write(invKinA[index] + err[2][0]);
-  LEG3S2.write(invKinB[index] + err[2][1]);
+  LEG3S1.write(invKinA[2 - index] + err[2][0]);
+  LEG3S2.write(invKinB[2 - index] + err[2][1]);
 }
 
 void L4Move(int index) {
