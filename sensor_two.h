@@ -1,10 +1,10 @@
+#ifndef SENSOR_TWO_H
+#define SENSOR_TWO_H
+
 #include <Wire.h>
 #include <Adafruit_ICM20948.h>
 
 Adafruit_ICM20948 icm;
-
-float leftThreshold = -2.0;
-float rightThreshold = 2.0;
 
 // Flag to indicate if the initial reference direction is set
 bool initialReferenceSet = false;
@@ -55,3 +55,6 @@ int getAvgGyro() {
 
   return (average/5);
 }
+
+
+#endif
