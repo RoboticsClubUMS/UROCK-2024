@@ -21,17 +21,17 @@ Servo LEG3S2;
 Servo LEG4S1;
 Servo LEG4S2;
 
-#define LEG1PIN1 15
-#define LEG1PIN2 4
+#define LEG1PIN1 32
+#define LEG1PIN2 33
 
-#define LEG2PIN1 13
-#define LEG2PIN2 12
+#define LEG2PIN1 25
+#define LEG2PIN2 26
 
-#define LEG3PIN1 33
-#define LEG3PIN2 32
+#define LEG3PIN1 19
+#define LEG3PIN2 18
 
-#define LEG4PIN1 22
-#define LEG4PIN2 23
+#define LEG4PIN1 17
+#define LEG4PIN2 16
 
 #define SERVO_MIN_PULSE 500
 #define SERVO_MAX_PULSE 2500
