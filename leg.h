@@ -3,11 +3,14 @@
 
 #include <ESP32Servo.h>
 
-int err[4][2] = {{5, 7}, {0, 0}, {3, 10}, {8, 10}};
+int err[4][2] = {{5, 7}, {3, 3}, {0, 14}, {9, 12}};
 //int invKinA[10] = {29, 16, 7, 3, 6, 15, 21, 25, 28, 29};
 int invKinA[3] = {90, 94, 117};  
 //int invKinB[10] = {29, 27, 30, 36, 45, 57, 54, 50, 44, 37};
 int invKinB[3] = {26, 43, 40};
+
+int staticArrayA[2] = {90, 75};
+int staticArrayB[2] = {30, 45};
 
 Servo LEG1S1;
 Servo LEG1S2;
@@ -65,6 +68,48 @@ void setupLeg() {
 
   LEG4S1.attach(LEG4PIN1, SERVO_MIN_PULSE, SERVO_MAX_PULSE);
   LEG4S2.attach(LEG4PIN2, SERVO_MIN_PULSE, SERVO_MAX_PULSE);
+}
+
+void readyLeg() {
+  LEG1S1.write(75 + err[0][0]);
+  LEG1S2.write(45 + err[0][1]);
+
+  LEG2S1.write((75 * 270 / 180) + err[1][0]);
+  LEG2S2.write((45 * 270 / 180)+ err[1][1]);
+
+  LEG3S1.write(75 + err[2][0]);
+  LEG3S2.write(45 + err[2][1]);
+
+  LEG4S1.write(75 + err[3][0]);
+  LEG4S2.write(45 + err[3][1]);
+}
+
+void standLeg() {
+  LEG1S1.write(90 + err[0][0]);
+  LEG1S2.write(30 + err[0][1]);
+
+  LEG2S1.write(135 + err[1][0]);
+  LEG2S2.write(45 + err[1][1]);
+
+  LEG3S1.write(90 + err[2][0]);
+  LEG3S2.write(30 + err[2][1]);
+
+  LEG4S1.write(90 + err[3][0]);
+  LEG4S2.write(30 + err[3][1]);
+}
+
+void staticLeg(int index) {
+  LEG1S1.write(staticArrayA[index] + err[0][0]);
+  LEG1S2.write(staticArrayB[index] + err[0][1]);
+
+  LEG2S1.write((staticArrayA[index] * 270 / 180) + err[1][0]);
+  LEG2S2.write((staticArrayB[index] * 270 / 180) + err[1][1]);
+
+  LEG3S1.write(staticArrayA[index] + err[2][0]);
+  LEG3S2.write(staticArrayB[index] + err[2][1]);
+
+  LEG4S1.write(staticArrayA[1 - index] + err[3][0]);
+  LEG4S2.write(staticArrayB[1 - index] + err[3][1]);
 }
 
 void L1Move(int index) {
